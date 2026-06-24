@@ -817,7 +817,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (opened) return;
     opened = true;
     gsap.killTweensOf(envImage);
-    gsap.to(hint, { opacity: 0, duration: 0.2 });
+    hint.style.opacity = '0';
+    if (envVideo.readyState < 2) {
+      envFlash.style.opacity = '1';
+      revealInvitation();
+      return;
+    }
     var p = envVideo.play();
     gsap.to(envImage, { opacity: 0, duration: 0.55, ease: 'power2.inOut', onComplete: function () { envImage.style.display = 'none'; } });
     gsap.to(envVideo, { opacity: 1, duration: 0.55, ease: 'power2.inOut' });
