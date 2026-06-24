@@ -364,11 +364,12 @@ section{padding:64px 22px}
 .ft-note{font-size:10px;color:var(--cream);opacity:.18;margin-top:22px;letter-spacing:1px;line-height:1.8}
 
 /* ── ENVELOPE ─────────────────────────────────────────── */
-#envelope-screen{position:fixed;inset:0;z-index:10000;overflow:hidden;cursor:pointer;opacity:0;background:#482a00}
+#envelope-screen{position:fixed;inset:0;z-index:10000;overflow:hidden;cursor:pointer;opacity:0;background:#482a00;animation:envFadeIn 1.2s ease .5s forwards}
+@keyframes envFadeIn{to{opacity:1}}
 #env-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:2;transform:scale(1.18)}
 #env-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:3;opacity:0;transform:scale(1.18)}
 #env-flash{position:fixed;inset:0;background:#fff;z-index:9999;opacity:0;pointer-events:none}
-.envelope-hint{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(212,184,117,.8);opacity:0;cursor:pointer;white-space:nowrap;z-index:10;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.envelope-hint{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(212,184,117,.8);opacity:0;cursor:pointer;white-space:nowrap;z-index:10;text-shadow:0 1px 4px rgba(0,0,0,.4);animation:envFadeIn .9s ease 1.2s forwards}
 .envelope-hint::after{content:'';display:block;width:32px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,184,117,.5),transparent);margin:10px auto 0;animation:hintPulse 2.2s ease-in-out infinite}
 @keyframes hintPulse{0%,100%{opacity:.4;width:32px}50%{opacity:1;width:54px}}
 
@@ -772,15 +773,9 @@ document.addEventListener('DOMContentLoaded', () => {
   var hint      = document.getElementById('env-hint');
   var opened    = false;
 
-  requestAnimationFrame(function () {
-    gsap.timeline()
-      .to(envScreen, { opacity: 1, duration: 1.2, ease: 'power2.out', delay: 0.3 })
-      .to(hint,      { opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.5');
-
-    gsap.to(envImage, {
-      scale: 1.20, duration: 2.2, ease: 'sine.inOut',
-      repeat: -1, yoyo: true, delay: 1.5
-    });
+  gsap.to(envImage, {
+    scale: 1.20, duration: 2.2, ease: 'sine.inOut',
+    repeat: -1, yoyo: true, delay: 1.5
   });
 
   var flashStarted = false, invitationReady = false;
