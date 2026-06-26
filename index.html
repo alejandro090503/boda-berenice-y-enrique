@@ -328,18 +328,45 @@ section{padding:64px 22px}
 .sdiv{width:30px;height:1px;background:rgba(212,184,117,.18);margin:22px auto}
 
 /* ── GALLERY ──────────────────────────────────────────── */
-#gallery{background:var(--ink3);padding:64px 14px}
-.gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:32px}
-.g-item{border-radius:8px;overflow:hidden;background:var(--ink2);will-change:transform}
-.g-item:first-child{grid-column:1/-1;aspect-ratio:16/10}
-.g-item:not(:first-child){aspect-ratio:3/4}
-.g-item img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  filter:brightness(.85) saturate(.75);
-  transition:transform .6s var(--smooth),filter .4s;
-  will-change:transform;
+/* ── GALLERY — 3D WHEEL (drag para girar) ─────────── */
+#gallery{
+  padding:72px 28px 80px;
+  background:linear-gradient(180deg,var(--ink) 0%,var(--ink3) 100%);
+  text-align:center;overflow:visible;
 }
-.g-item:active img{transform:scale(1.05);filter:brightness(.95) saturate(.9)}
+#gallery .lbl,#gallery .ttl{padding:0 24px}
+.gal-header-ornament{
+  width:120px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 20px;
+}
+.wheel-scene{
+  position:relative;width:100%;height:520px;
+  margin:40px auto 0;perspective:1400px;
+  transform-style:preserve-3d;overflow:visible;
+}
+.wheel-ring{
+  position:absolute;width:100%;height:100%;
+  transform-style:preserve-3d;cursor:grab;
+}
+.wheel-ring.dragging{cursor:grabbing}
+.wheel-card{
+  position:absolute;width:200px;height:280px;
+  left:50%;top:50%;margin-left:-100px;margin-top:-140px;
+  border-radius:18px;overflow:hidden;
+  border:2px solid rgba(212,184,117,.30);
+  box-shadow:0 12px 40px rgba(72,42,0,.22);
+  user-select:none;-webkit-user-select:none;
+}
+.wheel-card img{
+  width:100%;height:100%;object-fit:cover;
+  object-position:center;display:block;pointer-events:none;
+}
+.gal-hint{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:14px;font-weight:500;letter-spacing:3px;
+  color:var(--gold);margin-top:24px;opacity:.8;
+}
 
 /* ── RSVP ─────────────────────────────────────────────── */
 #rsvp{background:var(--ink)}
@@ -701,18 +728,22 @@ section{padding:64px 22px}
 </section>
 
 
-<!-- ═══════════════ 11. GALERÍA ══════════════════════ -->
-<section id="gallery">
-  <span class="lbl">Nuestra historia</span>
-  <h2 class="ttl">Galería</h2>
-  <div class="gline"></div>
-  <div class="gal-grid" id="galGrid">
-    <div class="g-item"><img src="fotos/bere-y-enrique-73.jpg" alt="Berenice y Enrique" loading="lazy"></div>
-    <div class="g-item"><img src="fotos/bere-y-enrique-56.jpg" alt="Berenice y Enrique" loading="lazy"></div>
-    <div class="g-item"><img src="fotos/bere-y-enrique-85.jpg" alt="Berenice y Enrique" loading="lazy"></div>
-    <div class="g-item"><img src="fotos/bere-y-enrique-153.jpg" alt="Berenice y Enrique" loading="lazy"></div>
-    <div class="g-item"><img src="fotos/bere-y-enrique-166.jpg" alt="Berenice y Enrique" loading="lazy"></div>
+<!-- ═══════════════ 11. GALERÍA — RUEDA 3D ══════════ -->
+<section id="gallery" aria-label="Galería de fotos">
+  <span class="lbl fu">Nuestros recuerdos</span>
+  <h2 class="ttl fu">Momentos <span style="font-family:'Great Vibes',cursive;color:var(--gold);font-size:42px;">juntos</span></h2>
+  <div class="gal-header-ornament fu"></div>
+  <div class="wheel-scene rv" id="wheel-scene">
+    <div class="wheel-ring" id="wheel-ring">
+      <div class="wheel-card"><img src="fotos/bere-y-enrique-73.jpg" alt="Berenice y Enrique" loading="lazy"></div>
+      <div class="wheel-card"><img src="fotos/bere-y-enrique-56.jpg" alt="Berenice y Enrique" loading="lazy"></div>
+      <div class="wheel-card"><img src="fotos/bere-y-enrique-85.jpg" alt="Berenice y Enrique" loading="lazy"></div>
+      <div class="wheel-card"><img src="fotos/bere-y-enrique-153.jpg" alt="Berenice y Enrique" loading="lazy"></div>
+      <div class="wheel-card"><img src="fotos/bere-y-enrique-166.jpg" alt="Berenice y Enrique" loading="lazy"></div>
+      <div class="wheel-card"><img src="fotos/bere-y-enrique-110.jpg" alt="Berenice y Enrique" loading="lazy"></div>
+    </div>
   </div>
+  <p class="gal-hint rv">Arrastra para girar</p>
 </section>
 
 
@@ -975,11 +1006,7 @@ function scrollAnims() {
     scrollTrigger: { trigger: '#album', start: 'top 80%', once: true }
   });
 
-  gsap.from('.g-item', {
-    opacity: 0, scale: .9, duration: .65, stagger: .1,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: '#gallery', start: 'top 82%', once: true }
-  });
+  initWheel();
 
   gsap.from('.rsvp-card', {
     opacity: 0, y: 18, duration: .55, ease,
@@ -1042,6 +1069,53 @@ function initRSVP() {
     document.getElementById('rsvpName').textContent = para;
     document.getElementById('rsvpPases').textContent = pases === 1 ? '1 pase' : pases + ' pases';
   }
+}
+
+function initWheel(){
+  var ring=document.getElementById('wheel-ring');
+  if(!ring)return;
+  var cards=ring.querySelectorAll('.wheel-card');
+  var n=cards.length;if(!n)return;
+  var radius=210;
+  var rot=0,vel=0,isDrag=false,startX=0,startRot=0,lastX=0,rafId=null;
+  cards.forEach(function(card,i){
+    card.style.transform='rotateY('+(360/n*i)+'deg) translateZ('+radius+'px)';
+  });
+  function setRot(){gsap.set(ring,{rotateY:rot});}
+  setRot();
+  function inertia(){
+    if(isDrag)return;
+    rot+=vel;vel*=0.94;setRot();
+    if(Math.abs(vel)>0.05){rafId=requestAnimationFrame(inertia);}
+  }
+  function pointerDown(x){
+    isDrag=true;ring.classList.add('dragging');
+    startX=x;lastX=x;startRot=rot;vel=0;
+    if(rafId)cancelAnimationFrame(rafId);
+  }
+  function pointerMove(x){
+    if(!isDrag)return;
+    var dx=x-startX;rot=startRot+dx*0.45;
+    vel=(x-lastX)*0.5;lastX=x;setRot();
+  }
+  function pointerUp(){
+    if(!isDrag)return;isDrag=false;
+    ring.classList.remove('dragging');
+    rafId=requestAnimationFrame(inertia);
+  }
+  ring.addEventListener('mousedown',function(e){e.preventDefault();pointerDown(e.clientX);});
+  window.addEventListener('mousemove',function(e){pointerMove(e.clientX);});
+  window.addEventListener('mouseup',pointerUp);
+  ring.addEventListener('touchstart',function(e){pointerDown(e.touches[0].clientX);},{passive:true});
+  ring.addEventListener('touchmove',function(e){pointerMove(e.touches[0].clientX);},{passive:true});
+  ring.addEventListener('touchend',pointerUp);
+  var auto=true;
+  (function spin(){
+    if(auto&&!isDrag){rot+=0.12;setRot();}
+    requestAnimationFrame(spin);
+  })();
+  ring.addEventListener('mousedown',function(){auto=false;});
+  ring.addEventListener('touchstart',function(){auto=false;});
 }
 
 async function confirmarAsistencia() {
