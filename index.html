@@ -225,41 +225,73 @@ section>*{position:relative;z-index:1}
 
 /* ── COUNTDOWN ────────────────────────────────────────── */
 #countdown{
-  background:var(--ink2);
-  border-top:1px solid rgba(212,184,117,.1);
-  border-bottom:1px solid rgba(212,184,117,.1);
+  background:transparent;
   position:relative;overflow:hidden;
 }
-#countdown::before{
-  content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);
-  width:320px;height:320px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,184,117,.08) 0%,transparent 70%);
-  pointer-events:none;z-index:0;
+.cd-bg{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg,var(--ink2) 0%,var(--ink) 50%,var(--ink2) 100%);
+  background-size:200% 200%;
+  animation:cdShift 8s ease-in-out infinite;
 }
-.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,2vw,10px);margin-top:30px}
+@keyframes cdShift{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.cd-phrase{
+  font-family:'Great Vibes',cursive;font-size:clamp(22px,6vw,30px);
+  color:var(--gold);text-align:center;margin:8px 0 28px;opacity:.7;
+  text-shadow:0 2px 12px rgba(212,184,117,.15);
+}
+.cd-grid{display:flex;justify-content:center;gap:clamp(12px,3.5vw,20px);margin-top:0}
 .cd-box{
-  text-align:center;padding:clamp(14px,4vw,22px) 6px clamp(12px,3vw,18px);
+  text-align:center;position:relative;
+  width:clamp(68px,19vw,82px);height:clamp(68px,19vw,82px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:transform .3s var(--spring);
+}
+.cd-ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1.5px solid rgba(212,184,117,.2);
+  box-shadow:0 0 16px rgba(212,184,117,.06) inset,0 4px 20px rgba(0,0,0,.3);
   background:linear-gradient(165deg,rgba(212,184,117,.08),rgba(212,184,117,.02));
-  border:1px solid rgba(212,184,117,.18);border-radius:12px;
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  transition:transform .3s var(--spring),box-shadow .3s;
-  box-shadow:0 4px 16px rgba(0,0,0,.2);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
 }
-.cd-box:active{transform:scale(.93)}
+.cd-ring-glow{
+  position:absolute;inset:-2px;border-radius:50%;
+  border:1px solid transparent;
+  background:conic-gradient(from 0deg,transparent 0%,rgba(212,184,117,.3) 25%,transparent 50%) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:cdRingSpin 6s linear infinite;
+  opacity:.5;
+}
+@keyframes cdRingSpin{to{transform:rotate(360deg)}}
+.cd-box:active{transform:scale(.9)}
 .cd-num{
-  font-family:'Cormorant Garamond',serif;font-size:clamp(28px,8vw,38px);font-weight:300;
+  font-family:'Cormorant Garamond',serif;font-size:clamp(26px,7.5vw,34px);font-weight:300;
   color:var(--gold);display:block;line-height:1;will-change:contents;
-  text-shadow:0 2px 12px rgba(212,184,117,.2);
+  text-shadow:0 0 18px rgba(212,184,117,.25);
+  position:relative;z-index:1;
 }
-.cd-lbl{font-size:clamp(6px,1.8vw,8px);letter-spacing:2px;text-transform:uppercase;color:var(--cream);opacity:.4;display:block;margin-top:6px}
+.cd-lbl{font-size:clamp(6px,1.7vw,8px);letter-spacing:2px;text-transform:uppercase;color:var(--cream);opacity:.45;display:block;margin-top:4px;position:relative;z-index:1}
+.cd-sep{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(20px,6vw,28px);
+  color:var(--gold);opacity:.25;align-self:center;padding-bottom:12px;
+}
 
 /* ── LOCATION ─────────────────────────────────────────── */
 #location{background:var(--ink);position:relative;overflow:hidden}
 #location::before{
-  content:'';position:absolute;bottom:-20%;left:50%;transform:translateX(-50%);
+  content:'';position:absolute;bottom:-20%;left:30%;
   width:300px;height:300px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,184,117,.06) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(212,184,117,.07) 0%,transparent 70%);
   pointer-events:none;
+  animation:orbFloat1 12s ease-in-out infinite alternate;
+}
+@keyframes orbFloat1{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(40px,-30px)}
 }
 .loc-card{
   background:linear-gradient(175deg,rgba(90,58,18,.45),rgba(72,42,0,.7));
@@ -302,31 +334,66 @@ section>*{position:relative;z-index:1}
 /* ── ITINERARY ────────────────────────────────────────── */
 #itinerary{background:var(--ink);position:relative;overflow:hidden}
 #itinerary::before{
-  content:'';position:absolute;top:30%;right:-30%;
-  width:250px;height:250px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,184,117,.05),transparent 70%);
+  content:'';position:absolute;top:30%;right:-20%;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,184,117,.06),transparent 70%);
   pointer-events:none;
+  animation:orbFloat4 16s ease-in-out infinite alternate;
 }
-.timeline{margin-top:36px;position:relative}
+@keyframes orbFloat4{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(-40px,50px)}
+}
+.timeline{margin-top:36px;position:relative;display:flex;flex-direction:column;gap:12px}
 .tl-track{
-  position:absolute;left:54px;top:8px;
-  width:1px;height:0;
-  background:linear-gradient(to bottom,rgba(212,184,117,.5) 0%,rgba(212,184,117,.4) 90%,transparent 100%);
-  transform-origin:top;
+  position:absolute;left:24px;top:36px;bottom:36px;
+  width:1px;height:auto;
+  background:linear-gradient(to bottom,transparent,rgba(212,184,117,.35) 10%,rgba(212,184,117,.3) 90%,transparent);
+  z-index:0;
 }
-.tl-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:30px}
-.tl-t{font-family:'Cormorant Garamond',serif;font-size:clamp(11px,3vw,13px);color:var(--gold);width:44px;flex-shrink:0;text-align:right;line-height:1.3;padding-top:3px}
-.tl-dot{
-  width:10px;height:10px;border-radius:50%;
-  border:1.5px solid var(--gold);background:var(--ink);
-  flex-shrink:0;margin-top:5px;position:relative;z-index:1;
-  transform:scale(0);transition:transform .4s var(--spring);
-  box-shadow:0 0 0 3px rgba(212,184,117,.08);
+.tl-card{
+  display:flex;align-items:flex-start;gap:16px;
+  position:relative;z-index:1;
+  padding:14px 16px 14px 0;
+  border-radius:12px;
+  transition:transform .3s var(--spring);
 }
-.tl-dot.on{transform:scale(1);box-shadow:0 0 8px rgba(212,184,117,.25),0 0 0 3px rgba(212,184,117,.1)}
-.tl-ev{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,4.5vw,20px);color:var(--cream);font-weight:400;line-height:1.2}
-.tl-de{font-size:clamp(10px,2.8vw,12px);color:var(--cream);opacity:.38;margin-top:4px}
-.tl-day{font-size:clamp(7px,2vw,9px);letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.7;margin:10px 0 24px;text-align:center}
+.tl-card:active{transform:scale(.98)}
+.tl-icon-wrap{
+  width:48px;height:48px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;position:relative;
+  background:linear-gradient(145deg,rgba(212,184,117,.12),rgba(212,184,117,.04));
+  border:1px solid rgba(212,184,117,.2);
+  box-shadow:0 4px 14px rgba(0,0,0,.25);
+}
+.tl-icon-wrap svg{width:20px;height:20px;color:var(--gold);flex-shrink:0}
+.tl-icon-wrap::after{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  border:1px solid rgba(212,184,117,.08);
+  opacity:0;transition:opacity .3s;
+}
+.tl-card:hover .tl-icon-wrap::after{opacity:1}
+.tl-body{flex:1;min-width:0}
+.tl-time{
+  font-family:'Lato',sans-serif;font-size:clamp(9px,2.4vw,10px);
+  letter-spacing:3px;text-transform:uppercase;color:var(--gold);
+  opacity:.7;margin-bottom:4px;font-weight:400;
+}
+.tl-ev{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,4.5vw,20px);color:var(--cream);font-weight:400;line-height:1.25}
+.tl-de{font-size:clamp(10px,2.8vw,12px);color:var(--cream);opacity:.38;margin-top:3px}
+.tl-day-badge{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:8px 0;padding:10px 0;
+}
+.tl-day-badge::before,.tl-day-badge::after{
+  content:'';flex:1;max-width:50px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(212,184,117,.3),transparent);
+}
+.tl-day-badge span{
+  font-size:clamp(8px,2.2vw,10px);letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);opacity:.7;white-space:nowrap;
+}
 
 /* ── DRESSCODE ────────────────────────────────────────── */
 #dresscode{background:var(--ink2);text-align:center;position:relative;overflow:hidden;
@@ -383,9 +450,14 @@ section>*{position:relative;z-index:1}
 /* ── FAMILY ───────────────────────────────────────────── */
 #family{background:var(--ink);position:relative;overflow:hidden}
 #family::before{
-  content:'';position:absolute;top:10%;left:-20%;
+  content:'';position:absolute;top:10%;left:-10%;
   width:250px;height:250px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,184,117,.04),transparent 70%);pointer-events:none;
+  background:radial-gradient(circle,rgba(212,184,117,.05),transparent 70%);pointer-events:none;
+  animation:orbFloat2 15s ease-in-out infinite alternate;
+}
+@keyframes orbFloat2{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(30px,40px)}
 }
 .fam-ttl{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,4.2vw,18px);font-weight:300;font-style:italic;color:var(--gold);text-align:center;margin:30px 0 16px}
 .fam-card{
@@ -411,9 +483,14 @@ section>*{position:relative;z-index:1}
   text-align:center;overflow:visible;position:relative;
 }
 #gallery::before{
-  content:'';position:absolute;top:15%;left:50%;transform:translateX(-50%);
+  content:'';position:absolute;top:15%;left:40%;
   width:350px;height:350px;border-radius:50%;
   background:radial-gradient(circle,rgba(212,184,117,.06),transparent 70%);pointer-events:none;
+  animation:orbFloat5 18s ease-in-out infinite alternate;
+}
+@keyframes orbFloat5{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(50px,-30px)}
 }
 #gallery .lbl,#gallery .ttl{padding:0 24px}
 .gal-header-ornament{
@@ -454,9 +531,14 @@ section>*{position:relative;z-index:1}
 /* ── RSVP (jennifer style) ────────────────────────────── */
 #rsvp{background:linear-gradient(180deg,var(--ink),var(--ink2));position:relative;overflow:hidden}
 #rsvp::before{
-  content:'';position:absolute;top:20%;left:50%;transform:translateX(-50%);
+  content:'';position:absolute;top:20%;left:40%;
   width:400px;height:400px;border-radius:50%;
   background:radial-gradient(circle,rgba(212,184,117,.07),transparent 70%);pointer-events:none;
+  animation:orbFloat3 20s ease-in-out infinite alternate;
+}
+@keyframes orbFloat3{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(-50px,40px)}
 }
 .rsvp-card{
   max-width:580px;margin:0 auto;
@@ -640,6 +722,38 @@ section>*{position:relative;z-index:1}
 .corner-orn--br{bottom:12px;right:12px;transform:scale(-1)}
 .corner-orn path{stroke:var(--gold);stroke-width:.8;fill:none}
 
+/* ── AMBIENT FLOATING PARTICLES (global) ─────────────── */
+.ambient-particles{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+}
+.amb-p{
+  position:absolute;border-radius:50%;background:var(--gold);
+  opacity:0;will-change:transform,opacity;
+}
+
+/* ── AMBIENT LIGHT ORBS (moving) ─────────────────────── */
+.amb-orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(212,184,117,.07),transparent 70%);
+  will-change:transform;
+}
+#main-content{position:relative}
+
+/* ── SHIMMER LINE (moving gold line between sections) ── */
+.shimmer-line{
+  width:100%;height:1px;position:relative;overflow:hidden;z-index:2;
+}
+.shimmer-line::after{
+  content:'';position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  animation:shimmerSlide 3.5s ease-in-out infinite;
+}
+@keyframes shimmerSlide{
+  0%{left:-60%}
+  100%{left:100%}
+}
+
 /* ── ELYSIUM CREDIT ───────────────────────────────────── */
 .el-sep{width:44px;height:1px;background:rgba(212,184,117,.18);margin:30px auto 16px}
 .el-credit{
@@ -663,6 +777,9 @@ section>*{position:relative;z-index:1}
 <div id="env-flash"></div>
 
 <div id="main-content" style="visibility:hidden">
+<!-- AMBIENT FLOATING PARTICLES -->
+<div class="ambient-particles" id="ambPart"></div>
+
 <!-- SCROLL PROGRESS -->
 <div id="prog"></div>
 
@@ -717,20 +834,25 @@ section>*{position:relative;z-index:1}
 
 <!-- ═══════════════ 2. CUENTA REGRESIVA ══════════════ -->
 <section id="countdown">
+  <div class="cd-bg"></div>
   <span class="lbl">El gran día llega en</span>
   <h2 class="ttl">Cuenta Regresiva</h2>
   <div class="gline"></div>
+  <p class="cd-phrase">Faltan...</p>
   <div class="cd-grid">
-    <div class="cd-box"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">Días</span></div>
-    <div class="cd-box"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">Horas</span></div>
-    <div class="cd-box"><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">Minutos</span></div>
-    <div class="cd-box"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">Segundos</span></div>
+    <div class="cd-box"><div class="cd-ring"></div><div class="cd-ring-glow"></div><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">Días</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-box"><div class="cd-ring"></div><div class="cd-ring-glow"></div><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">Horas</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-box"><div class="cd-ring"></div><div class="cd-ring-glow"></div><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">Min</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-box"><div class="cd-ring"></div><div class="cd-ring-glow"></div><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">Seg</span></div>
   </div>
 </section>
 
 
 <!-- separator -->
-<div class="sec-orn"><span class="sec-orn-dot">✦</span></div>
+<div class="shimmer-line"></div>
 
 <!-- ═══════════════ 3. UBICACIONES ═══════════════════ -->
 <section id="location">
@@ -770,7 +892,7 @@ section>*{position:relative;z-index:1}
 
 
 <!-- separator -->
-<div class="sec-orn"><span class="sec-orn-dot">✦</span></div>
+<div class="shimmer-line"></div>
 
 <!-- ═══════════════ 5. ITINERARIO ════════════════════ -->
 <section id="itinerary">
@@ -781,23 +903,31 @@ section>*{position:relative;z-index:1}
   <span class="lbl">Fin de semana de bodas</span>
   <h2 class="ttl">Itinerario</h2>
   <div class="gline"></div>
-  <p class="tl-day">Sábado 10 de Abril 2027</p>
+  <div class="tl-day-badge"><span>Sábado 10 de Abril 2027</span></div>
   <div class="timeline" id="tlWrap">
     <div class="tl-track" id="tlTrack"></div>
 
-    <div class="tl-row"><div class="tl-t">3:00<br>PM</div><div class="tl-dot"></div><div><p class="tl-ev">Ceremonia Religiosa</p><p class="tl-de">Jardín Principal</p></div></div>
-    <div class="tl-row"><div class="tl-t">4:00<br>PM</div><div class="tl-dot"></div><div><p class="tl-ev">Cóctel &amp; Wedding Merch Store</p><p class="tl-de">Jardín Principal</p></div></div>
-    <div class="tl-row"><div class="tl-t">4:45<br>PM</div><div class="tl-dot"></div><div><p class="tl-ev">Recepción</p><p class="tl-de">Ingreso al salón principal</p></div></div>
-    <div class="tl-row"><div class="tl-t">5:00<br>PM</div><div class="tl-dot"></div><div><p class="tl-ev">Banquete</p><p class="tl-de">Salón Principal</p></div></div>
-    <div class="tl-row"><div class="tl-t">6:30<br>PM</div><div class="tl-dot"></div><div><p class="tl-ev">Baile de Novios</p><p class="tl-de">El primer vals de Berenice &amp; Enrique</p></div></div>
-    <div class="tl-row"><div class="tl-t">7:00<br>PM</div><div class="tl-dot"></div><div><p class="tl-ev">Baile General</p><p class="tl-de">¡Todos a la pista!</p></div></div>
-    <div class="tl-row"><div class="tl-t">9:30<br>PM</div><div class="tl-dot"></div><div><p class="tl-ev">Pastel</p><p class="tl-de">Jardín Principal</p></div></div>
-    <div class="tl-row"><div class="tl-t">10:00<br>PM</div><div class="tl-dot"></div><div><p class="tl-ev">Fiesta</p><p class="tl-de">¡Que comience la celebración!</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 00-2 2v16l8-4 8 4V4a2 2 0 00-2-2z"/></svg></div><div class="tl-body"><p class="tl-time">3:00 PM</p><p class="tl-ev">Ceremonia Religiosa</p><p class="tl-de">Jardín Principal</p></div></div>
 
-    <div class="tl-row" style="margin-top:14px;margin-bottom:14px"><div class="tl-t" style="font-size:8px;letter-spacing:3px;text-transform:uppercase;opacity:.7;width:44px;text-align:right">DOM<br>11</div><div class="tl-dot" style="background:var(--gold);border-color:var(--gold)"></div><div><p class="tl-ev" style="font-size:14px;letter-spacing:2px;text-transform:uppercase;opacity:.7">Domingo 11 de Abril</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 110 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg></div><div class="tl-body"><p class="tl-time">4:00 PM</p><p class="tl-ev">Cóctel &amp; Wedding Merch Store</p><p class="tl-de">Jardín Principal</p></div></div>
 
-    <div class="tl-row"><div class="tl-t">10:30<br>AM</div><div class="tl-dot"></div><div><p class="tl-ev">Desayuno Torna Boda</p><p class="tl-de">Buen provecho</p></div></div>
-    <div class="tl-row"><div class="tl-t">12:00<br>PM</div><div class="tl-dot"></div><div><p class="tl-ev">Pool Party</p><p class="tl-de">¡A refrescarse!</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="tl-body"><p class="tl-time">4:45 PM</p><p class="tl-ev">Recepción</p><p class="tl-de">Ingreso al salón principal</p></div></div>
+
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 110 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><path d="M7 2v4M11 2v4"/></svg></div><div class="tl-body"><p class="tl-time">5:00 PM</p><p class="tl-ev">Banquete</p><p class="tl-de">Salón Principal</p></div></div>
+
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="tl-body"><p class="tl-time">6:30 PM</p><p class="tl-ev">Baile de Novios</p><p class="tl-de">El primer vals de Berenice &amp; Enrique</p></div></div>
+
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="tl-body"><p class="tl-time">7:00 PM</p><p class="tl-ev">Baile General</p><p class="tl-de">¡Todos a la pista!</p></div></div>
+
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="tl-body"><p class="tl-time">9:30 PM</p><p class="tl-ev">Pastel</p><p class="tl-de">Jardín Principal</p></div></div>
+
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="tl-body"><p class="tl-time">10:00 PM</p><p class="tl-ev">Fiesta</p><p class="tl-de">¡Que comience la celebración!</p></div></div>
+
+    <div class="tl-day-badge"><span>Domingo 11 de Abril</span></div>
+
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div><div class="tl-body"><p class="tl-time">10:30 AM</p><p class="tl-ev">Desayuno Torna Boda</p><p class="tl-de">Buen provecho</p></div></div>
+
+    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><path d="M12 9v6M9 12h6"/></svg></div><div class="tl-body"><p class="tl-time">12:00 PM</p><p class="tl-ev">Pool Party</p><p class="tl-de">¡A refrescarse!</p></div></div>
   </div>
 </section>
 
@@ -820,7 +950,7 @@ section>*{position:relative;z-index:1}
 
 
 <!-- separator -->
-<div class="sec-orn"><span class="sec-orn-dot">✦</span></div>
+<div class="shimmer-line"></div>
 
 <!-- ═══════════════ 7. MESA DE REGALOS ═══════════════ -->
 <section id="gifts">
@@ -905,7 +1035,7 @@ section>*{position:relative;z-index:1}
 
 
 <!-- separator -->
-<div class="sec-orn"><span class="sec-orn-dot">✦</span></div>
+<div class="shimmer-line"></div>
 
 <!-- ═══════════════ 10. FAMILIA ══════════════════════ -->
 <section id="family">
@@ -935,7 +1065,7 @@ section>*{position:relative;z-index:1}
 
 
 <!-- separator -->
-<div class="sec-orn"><span class="sec-orn-dot">✦</span></div>
+<div class="shimmer-line"></div>
 
 <!-- ═══════════════ 11. GALERÍA — RUEDA 3D ══════════ -->
 <section id="gallery" aria-label="Galería de fotos">
@@ -1068,6 +1198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('main-content').style.visibility = 'visible';
     heroAnim();
     spawnParticles();
+    spawnAmbient();
     scrollAnims();
     countdown();
     setInterval(countdown, 1000);
@@ -1172,6 +1303,60 @@ function spawnParticles() {
   }
 }
 
+/* ── AMBIENT PARTICLES & ORBS ───────────────────────── */
+function spawnAmbient() {
+  const c = document.getElementById('ambPart');
+  if (!c) return;
+
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement('div');
+    p.className = 'amb-p';
+    const sz = Math.random() * 3 + 1;
+    Object.assign(p.style, {
+      width: sz + 'px', height: sz + 'px',
+      left: Math.random() * 100 + '%',
+      top: Math.random() * 100 + '%'
+    });
+    c.appendChild(p);
+    gsap.to(p, {
+      y: -(100 + Math.random() * 200),
+      x: (Math.random() - .5) * 80,
+      opacity: Math.random() * .3 + .05,
+      duration: 6 + Math.random() * 8,
+      delay: Math.random() * 6,
+      ease: 'none', repeat: -1,
+      onRepeat() {
+        gsap.set(p, {
+          left: Math.random() * 100 + '%',
+          top: (50 + Math.random() * 50) + '%',
+          x: 0, y: 0, opacity: 0
+        });
+      }
+    });
+  }
+
+  const orbs = [
+    { w: 220, x: '-10%', y: '15%', dur: 18 },
+    { w: 180, x: '80%', y: '45%', dur: 22 },
+    { w: 260, x: '30%', y: '75%', dur: 25 },
+  ];
+  orbs.forEach(o => {
+    const orb = document.createElement('div');
+    orb.className = 'amb-orb';
+    Object.assign(orb.style, {
+      width: o.w + 'px', height: o.w + 'px',
+      left: o.x, top: o.y
+    });
+    c.appendChild(orb);
+    gsap.to(orb, {
+      x: (Math.random() - .5) * 120,
+      y: (Math.random() - .5) * 100,
+      duration: o.dur, ease: 'sine.inOut',
+      repeat: -1, yoyo: true
+    });
+  });
+}
+
 /* ── SCROLL ANIMATIONS ───────────────────────────────── */
 function scrollAnims() {
   const ease = 'power3.out';
@@ -1207,12 +1392,9 @@ function scrollAnims() {
   ScrollTrigger.create({
     trigger: '#itinerary', start: 'top 72%', once: true,
     onEnter() {
-      const wrap = document.getElementById('tlWrap');
-      gsap.to('#tlTrack', { height: wrap.offsetHeight - 16, duration: 3, ease: 'power2.inOut' });
-      gsap.from('.tl-row', { opacity: 0, x: -24, duration: .7, stagger: .12, ease: cine, delay: .2 });
-      document.querySelectorAll('.tl-dot').forEach((d, i) => {
-        setTimeout(() => d.classList.add('on'), (350 + i * 150));
-      });
+      gsap.from('.tl-card', { opacity: 0, x: -30, duration: .8, stagger: .1, ease: cine, delay: .15 });
+      gsap.from('.tl-icon-wrap', { scale: 0, duration: .6, stagger: .1, ease: 'back.out(2)', delay: .25 });
+      gsap.from('.tl-day-badge', { opacity: 0, y: 14, duration: .6, stagger: .15, ease: cine, delay: .1 });
     }
   });
 
