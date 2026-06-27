@@ -229,11 +229,12 @@ section>*{position:relative;z-index:1}
   background:#f0e8da;
   position:relative;overflow:hidden;
 }
-#countdown .lbl,#countdown .ttl{color:var(--ink)}
+#countdown .lbl,#countdown .ttl{color:var(--ink);text-shadow:none}
+#countdown .lbl{font-weight:700;opacity:.7}
 #countdown .gline{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .cd-phrase{
   font-family:'Great Vibes',cursive;font-size:clamp(22px,6vw,30px);
-  color:var(--ink2);text-align:center;margin:8px 0 32px;opacity:.8;
+  color:var(--ink);text-align:center;margin:8px 0 32px;opacity:1;
 }
 .cd-grid{display:flex;justify-content:center;gap:clamp(16px,4.5vw,24px);margin-top:0}
 .cd-box{
@@ -250,7 +251,7 @@ section>*{position:relative;z-index:1}
 .cd-lbl{
   font-family:'Lato',sans-serif;
   font-size:clamp(8px,2.2vw,10px);letter-spacing:3px;text-transform:uppercase;
-  color:var(--ink2);opacity:.6;display:block;margin-top:6px;
+  color:var(--ink);opacity:.9;display:block;margin-top:6px;font-weight:700;
 }
 .cd-sep{
   font-family:'Cormorant Garamond',serif;font-size:clamp(28px,8vw,40px);font-weight:200;
@@ -262,8 +263,8 @@ section>*{position:relative;z-index:1}
 }
 .cd-date-text{
   font-family:'Cormorant Garamond',serif;font-size:clamp(13px,3.5vw,15px);
-  color:var(--ink2);opacity:.7;text-align:center;margin-top:14px;
-  letter-spacing:2px;font-style:italic;
+  color:var(--ink);opacity:.9;text-align:center;margin-top:14px;
+  letter-spacing:2px;font-style:italic;font-weight:600;
 }
 
 /* ── LOCATION ─────────────────────────────────────────── */
@@ -307,7 +308,8 @@ section>*{position:relative;z-index:1}
   background:#f0e8da;text-align:center;
   position:relative;overflow:hidden;
 }
-#calendar .lbl,#calendar .ttl,#calendar .cal-sub{color:var(--ink)}
+#calendar .lbl,#calendar .ttl,#calendar .cal-sub{color:var(--ink);text-shadow:none}
+#calendar .lbl{font-weight:700;opacity:.7}
 #calendar .gline{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 #calendar::before{
   content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -315,7 +317,7 @@ section>*{position:relative;z-index:1}
   background:radial-gradient(circle,rgba(212,184,117,.06),transparent 70%);
   pointer-events:none;
 }
-.cal-sub{font-size:clamp(12px,3.3vw,14px);color:var(--ink);opacity:.6;line-height:1.9;margin:14px 0 28px}
+.cal-sub{font-size:clamp(13px,3.3vw,15px);color:var(--ink);opacity:.9;line-height:1.9;margin:14px 0 28px;font-weight:600}
 #calendar .btn-gold{background:linear-gradient(135deg,var(--ink),var(--ink2));color:var(--cream);box-shadow:0 4px 22px rgba(72,42,0,.3)}
 
 /* ── ITINERARIO V3 — Centered Glowing Timeline ── */
@@ -392,14 +394,15 @@ section>*{position:relative;z-index:1}
 
 /* ── DRESSCODE ────────────────────────────────────────── */
 #dresscode{background:#f0e8da;text-align:center;position:relative;overflow:hidden}
-#dresscode .lbl,#dresscode .ttl{color:var(--ink)}
+#dresscode .lbl,#dresscode .ttl{color:var(--ink);text-shadow:none}
+#dresscode .lbl{font-weight:700;opacity:.7}
 #dresscode .gline{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 #dresscode::before{
   content:'';position:absolute;top:20%;left:50%;transform:translateX(-50%);
   width:280px;height:280px;border-radius:50%;
   background:radial-gradient(circle,rgba(212,184,117,.05),transparent 70%);pointer-events:none;
 }
-.dc-sub{text-align:center;font-size:clamp(12px,3.3vw,14px);color:var(--ink);opacity:.85;line-height:1.9;margin:14px 0 32px}
+.dc-sub{text-align:center;font-size:clamp(13px,3.3vw,15px);color:var(--ink);opacity:1;line-height:1.9;margin:14px 0 32px;font-weight:600}
 .dc-figures{
   display:flex;align-items:center;justify-content:center;
   gap:30px;margin:6px auto 28px;max-width:380px;
@@ -407,27 +410,27 @@ section>*{position:relative;z-index:1}
 .dc-fig{display:flex;flex-direction:column;align-items:center;gap:14px;flex:1}
 .dc-fig img{height:220px;width:auto;display:block;filter:drop-shadow(0 6px 14px rgba(72,42,0,.22))}
 .dc-fig-label{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;letter-spacing:1px;color:var(--ink)}
-.dc-fig-sub{font-family:'Lato',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--ink);opacity:.75;margin-top:-8px}
+.dc-fig-sub{font-family:'Lato',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--ink);opacity:.95;margin-top:-8px}
 .dc-sep-line{width:1px;align-self:stretch;min-height:118px;background:linear-gradient(180deg,transparent,rgba(212,184,117,.35) 18%,rgba(212,184,117,.35) 82%,transparent)}
 .palette{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-bottom:30px}
 .pal-item{text-align:center;cursor:pointer}
 .pal-sw{
   width:52px;height:52px;border-radius:50%;
   margin:0 auto 8px;
-  border:2px solid rgba(255,255,255,.08);
+  border:2px solid rgba(72,42,0,.15);
   box-shadow:0 6px 20px rgba(0,0,0,.3);
   will-change:transform;
   transition:transform .2s var(--spring),box-shadow .2s;
 }
 .pal-sw:active{transform:scale(1.18)!important}
-.pal-nm{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);opacity:.5}
+.pal-nm{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);opacity:.9;font-weight:700}
 .dc-note{
   background:rgba(72,42,0,.06);border-left:2px solid var(--gold);
   padding:18px 18px;border-radius:0 8px 8px 0;
-  font-size:12px;color:var(--ink);opacity:.68;line-height:1.8;
+  font-size:13px;color:var(--ink);opacity:.9;line-height:1.8;font-weight:600;
   text-align:left;
 }
-.dc-note strong{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);display:block;margin-bottom:6px}
+.dc-note strong{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ink);display:block;margin-bottom:6px;font-weight:700}
 .dc-avoid{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:20px}
 .dc-avoid-item{text-align:center}
 .dc-avoid-sw{
@@ -441,7 +444,7 @@ section>*{position:relative;z-index:1}
   border:2px solid rgba(255,0,0,.4);
   background:repeating-linear-gradient(45deg,transparent,transparent 4px,rgba(255,0,0,.15) 4px,rgba(255,0,0,.15) 5px);
 }
-.dc-avoid-nm{font-size:7px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);opacity:.35}
+.dc-avoid-nm{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);opacity:.8;font-weight:600}
 
 /* ── FAMILY ───────────────────────────────────────────── */
 #family{background:var(--ink);position:relative;overflow:hidden}
@@ -527,7 +530,8 @@ section>*{position:relative;z-index:1}
 /* ── RSVP (jennifer style) ────────────────────────────── */
 /* ── RSVP — Premium Beige Card ────────────────────────── */
 #rsvp{background:#f0e8da;position:relative;overflow:hidden}
-#rsvp .lbl,#rsvp .ttl{color:var(--ink)}
+#rsvp .lbl,#rsvp .ttl{color:var(--ink);text-shadow:none}
+#rsvp .lbl{font-weight:700;opacity:.7}
 #rsvp .gline{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .rsvp-card{
   max-width:580px;margin:0 auto;
@@ -553,7 +557,7 @@ section>*{position:relative;z-index:1}
 .rsvp-ornament{display:block;margin:0 auto 28px;width:min(280px,75vw);height:auto}
 .rsvp-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(28px,4.2vw,42px);color:var(--ink);margin-bottom:18px;line-height:1.15}
 .rsvp-title em{color:var(--gold);font-style:italic}
-.rsvp-text{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,17px);color:var(--ink2);opacity:.8;line-height:1.85;margin-bottom:36px;font-weight:400;max-width:420px;margin-left:auto;margin-right:auto}
+.rsvp-text{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,17px);color:var(--ink);opacity:.9;line-height:1.85;margin-bottom:36px;font-weight:500;max-width:420px;margin-left:auto;margin-right:auto}
 .rsvp-divider{display:flex;align-items:center;gap:14px;margin-bottom:32px;max-width:320px;margin-left:auto;margin-right:auto}
 .rsvp-divider::before,.rsvp-divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(212,184,117,.6),transparent)}
 .rsvp-divider-heart{color:var(--gold);flex-shrink:0;opacity:.8}
@@ -568,7 +572,7 @@ section>*{position:relative;z-index:1}
   -webkit-appearance:none;min-height:52px;
 }
 .rsvp-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,184,117,.2);background:rgba(255,255,255,.75)}
-.rsvp-input::placeholder{color:var(--ink2);opacity:.4;font-weight:300}
+.rsvp-input::placeholder{color:var(--ink);opacity:.5;font-weight:400}
 .rsvp-btn{
   display:flex;align-items:center;justify-content:center;gap:12px;
   width:100%;max-width:420px;margin:0 auto;
@@ -588,7 +592,7 @@ section>*{position:relative;z-index:1}
 .rsvp-btn:hover>*{color:var(--ink)}
 .rsvp-btn>*{position:relative;z-index:1}
 .rsvp-pases-display{max-width:420px;margin:0 auto 28px;padding:20px 32px;background:rgba(255,255,255,.45);border:1px solid rgba(212,184,117,.35);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.rsvp-pases-label{font-family:'Lato',sans-serif;font-size:12px;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--ink2);opacity:.7}
+.rsvp-pases-label{font-family:'Lato',sans-serif;font-size:12px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--ink);opacity:.9}
 .rsvp-pases-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(36px,5vw,52px);color:var(--gold);line-height:1}
 .rsvp-deadline{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-family:'Lato',sans-serif;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink2);padding-left:.4em;font-weight:600}
 .rsvp-toggle{display:flex;gap:10px;max-width:420px;margin:0 auto 20px}
@@ -596,7 +600,7 @@ section>*{position:relative;z-index:1}
 .rsvp-toggle-btn:disabled{opacity:.45;cursor:not-allowed}
 .rsvp-toggle-btn.rsvp-toggle-selected-yes{background:rgba(107,155,100,.18);border-color:#4a7848;color:#2d6b2a}
 .rsvp-toggle-btn.rsvp-toggle-selected-no{background:rgba(212,184,117,.18);border-color:var(--gold);color:var(--ink2)}
-#rsvp-pases-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--ink2);opacity:.7;text-align:center;margin:0 auto 20px;max-width:420px;display:none}
+#rsvp-pases-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--ink);opacity:.9;text-align:center;margin:0 auto 20px;max-width:420px;display:none}
 #rsvp-feedback{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;text-align:center;margin:14px auto 0;max-width:420px;display:none;color:var(--ink)}
 
 /* ── FOOTER ───────────────────────────────────────────── */
@@ -647,9 +651,10 @@ section>*{position:relative;z-index:1}
   width:280px;height:280px;border-radius:50%;
   background:radial-gradient(circle,rgba(212,184,117,.12),transparent 70%);pointer-events:none;
 }
-#gifts .lbl,#gifts .ttl{color:var(--ink)}
+#gifts .lbl,#gifts .ttl{color:var(--ink);text-shadow:none}
+#gifts .lbl{font-weight:700;opacity:.7}
 #gifts .gline{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.gf-sub{text-align:center;font-size:clamp(12px,3.3vw,14px);color:var(--ink);opacity:.62;line-height:1.9;margin:14px 0 28px}
+.gf-sub{text-align:center;font-size:clamp(13px,3.3vw,15px);color:var(--ink);opacity:.9;line-height:1.9;margin:14px 0 28px;font-weight:600}
 /* ── Sobre interactivo lluvia de sobres ── */
 .env-interactive{display:flex;flex-direction:column;align-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none;border:none;background:none;padding:0}
 .env-body{perspective:700px;position:relative;width:260px;height:200px}
@@ -1100,7 +1105,7 @@ section>*{position:relative;z-index:1}
     </div>
   </div>
 
-  <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.6;text-align:center;margin-bottom:24px">Colores sugeridos</p>
+  <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ink);opacity:.7;text-align:center;margin-bottom:24px;font-weight:700">Colores sugeridos</p>
   <div class="palette" id="palette">
     <div class="pal-item"><div class="pal-sw" style="background:#fdc700"></div><p class="pal-nm">Mostaza</p></div>
     <div class="pal-item"><div class="pal-sw" style="background:#da5100"></div><p class="pal-nm">Terracota</p></div>
@@ -1195,7 +1200,7 @@ section>*{position:relative;z-index:1}
 
       <span class="lbl">Confirmación de asistencia</span>
       <h2 class="rsvp-title">Tu presencia <em>significa</em> todo</h2>
-      <p class="rsvp-text">Confirma tu asistencia antes del <strong style="color:var(--gold)">1 de Marzo de 2027</strong>. Será un honor contar contigo.</p>
+      <p class="rsvp-text">Confirma tu asistencia antes del <strong style="color:var(--ink);font-weight:700">1 de Marzo de 2027</strong>. Será un honor contar contigo.</p>
 
       <p id="rsvp-name-display" style="display:none;font-family:'Great Vibes',cursive;font-size:clamp(30px,7vw,44px);color:var(--gold);line-height:1.2;margin:18px auto 4px"></p>
 
