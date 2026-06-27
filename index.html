@@ -773,7 +773,7 @@ section>*{position:relative;z-index:1}
 
 <!-- ENVELOPE SCREEN -->
 <div id="envelope-screen" role="button" aria-label="Toca para abrir tu invitación">
-  <img id="env-image" src="sobre.jpg" alt="Sobre invitación Berenice &amp; Enrique" />
+  <img id="env-image" src="sobre.png" alt="Sobre invitación Berenice &amp; Enrique" />
   <video id="env-video" src="sobre-apertura.mp4" playsinline webkit-playsinline muted preload="auto"></video>
   <p class="envelope-hint" id="env-hint">Toca para abrir</p>
 </div>
@@ -1305,9 +1305,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   envVideo.addEventListener('timeupdate', function () {
-    if (!flashStarted && envVideo.duration && envVideo.currentTime >= envVideo.duration - 5) {
+    if (!flashStarted && envVideo.duration && envVideo.currentTime >= 2) {
       flashStarted = true;
-      gsap.to(envFlash, { opacity: 1, duration: 4.5, ease: 'none', onComplete: revealInvitation });
+      gsap.to(envFlash, { opacity: 1, duration: 2, ease: 'none', onComplete: revealInvitation });
     }
   });
 
