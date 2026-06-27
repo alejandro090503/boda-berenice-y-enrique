@@ -334,63 +334,77 @@ section>*{position:relative;z-index:1}
 }
 .cal-sub{font-size:clamp(12px,3.3vw,14px);color:var(--cream);opacity:.6;line-height:1.9;margin:14px 0 28px}
 
-/* ── ITINERARY ────────────────────────────────────────── */
-#itinerary{background:var(--ink);position:relative;overflow:hidden}
-#itinerary::before{
-  content:'';position:absolute;top:30%;right:-20%;
-  width:280px;height:280px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,184,117,.06),transparent 70%);
-  pointer-events:none;
-  animation:orbFloat4 16s ease-in-out infinite alternate;
+/* ── ITINERARIO V3 — Centered Glowing Timeline ── */
+#itinerary{background:var(--ink);overflow:visible;padding-left:24px;padding-right:24px;position:relative}
+.itv3{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;
+  padding:10px 0 10px;
 }
-@keyframes orbFloat4{
-  0%{transform:translate(0,0)}
-  100%{transform:translate(-40px,50px)}
+.itv3-track{
+  position:absolute;left:50%;transform:translateX(-50%);
+  top:0;bottom:0;width:1px;z-index:0;
+  background:linear-gradient(to bottom,
+    transparent 0%,
+    rgba(212,184,117,0.35) 10%,
+    rgba(90,58,18,0.25) 45%,
+    rgba(212,184,117,0.30) 80%,
+    transparent 100%);
 }
-.timeline{margin-top:36px;position:relative;display:flex;flex-direction:column;gap:14px}
-.tl-track{display:none}
-.tl-card{
-  display:flex;flex-direction:column;align-items:center;text-align:center;
-  position:relative;z-index:1;
-  padding:18px 16px;
-  border-radius:14px;
-  background:linear-gradient(165deg,rgba(212,184,117,.06),rgba(212,184,117,.02));
-  border:1px solid rgba(212,184,117,.1);
-  transition:transform .3s var(--spring);
+.itv3-glow{
+  position:absolute;left:50%;transform:translateX(-50%);
+  top:0;width:5px;height:110px;
+  background:linear-gradient(to bottom,
+    transparent,
+    rgba(212,184,117,0.55) 20%,
+    rgba(212,184,117,0.90) 50%,
+    rgba(212,184,117,0.55) 80%,
+    transparent);
+  filter:blur(3px);border-radius:6px;
+  z-index:1;pointer-events:none;
 }
-.tl-card:active{transform:scale(.97)}
-.tl-icon-wrap{
-  width:56px;height:56px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:50%;position:relative;
-  overflow:hidden;margin-bottom:10px;
+.itv3-item{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;padding:30px 16px 4px;width:100%;
 }
-.tl-icon-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-.tl-icon-wrap::after{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  border:1.5px solid rgba(212,184,117,.2);
-  pointer-events:none;
+.itv3-gem{
+  width:9px;height:9px;
+  background:linear-gradient(135deg,#d4b875 30%,#7A5A1A);
+  transform:rotate(45deg);border-radius:2px;
+  box-shadow:0 0 0 4px rgba(212,184,117,0.12),0 0 18px rgba(212,184,117,0.45);
+  margin-bottom:18px;flex-shrink:0;
 }
-.tl-body{width:100%}
-.tl-time{
-  font-family:'Lato',sans-serif;font-size:clamp(9px,2.4vw,10px);
-  letter-spacing:3px;text-transform:uppercase;color:var(--gold);
-  opacity:.8;margin-bottom:4px;font-weight:400;
+.itv3-gem-brown{
+  background:linear-gradient(135deg,#8B6914 30%,#3A2200);
+  box-shadow:0 0 0 4px rgba(90,58,18,0.14),0 0 18px rgba(90,58,18,0.45);
 }
-.tl-ev{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,4.5vw,20px);color:var(--cream);font-weight:400;line-height:1.25}
-.tl-de{font-size:clamp(10px,2.8vw,12px);color:var(--cream);opacity:.38;margin-top:3px}
-.tl-day-badge{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  margin:8px 0;padding:10px 0;
+.itv3-gem-mid{
+  background:linear-gradient(135deg,#C4A050 30%,#5A3A10);
+  box-shadow:0 0 0 4px rgba(212,184,117,0.10),0 0 18px rgba(212,184,117,0.38);
 }
-.tl-day-badge::before,.tl-day-badge::after{
-  content:'';flex:1;max-width:50px;height:1px;
-  background:linear-gradient(to right,transparent,rgba(212,184,117,.3),transparent);
+.itv3-time{
+  font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;
+  letter-spacing:8px;color:var(--cream);line-height:1;margin-bottom:6px;
+  text-indent:8px;
 }
-.tl-day-badge span{
-  font-size:clamp(8px,2.2vw,10px);letter-spacing:4px;text-transform:uppercase;
-  color:var(--gold);opacity:.7;white-space:nowrap;
+.itv3-ev{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:14px;color:rgba(212,184,117,0.75);
+  letter-spacing:3px;text-transform:uppercase;line-height:1.5;
+  text-indent:3px;
 }
+.itv3-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:12px;color:var(--gold);opacity:.6;
+  letter-spacing:1px;margin-top:4px;line-height:1.4;
+}
+.itv3-day{
+  font-family:'Lato',sans-serif;font-size:clamp(8px,2.2vw,10px);
+  letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.7;
+  padding:18px 0 6px;
+}
+.itv3-item:last-child{padding-bottom:10px;}
 
 /* ── DRESSCODE ────────────────────────────────────────── */
 #dresscode{background:#f0e8da;text-align:center;position:relative;overflow:hidden;
@@ -892,38 +906,86 @@ section>*{position:relative;z-index:1}
 
 <!-- ═══════════════ 5. ITINERARIO ════════════════════ -->
 <section id="itinerary">
-  <svg class="corner-orn corner-orn--tl" viewBox="0 0 28 28"><path d="M2 26V8Q2 2 8 2h18"/></svg>
-  <svg class="corner-orn corner-orn--tr" viewBox="0 0 28 28"><path d="M2 26V8Q2 2 8 2h18"/></svg>
-  <svg class="corner-orn corner-orn--bl" viewBox="0 0 28 28"><path d="M2 26V8Q2 2 8 2h18"/></svg>
-  <svg class="corner-orn corner-orn--br" viewBox="0 0 28 28"><path d="M2 26V8Q2 2 8 2h18"/></svg>
   <span class="lbl">Fin de semana de bodas</span>
   <h2 class="ttl">Itinerario</h2>
   <div class="gline"></div>
-  <div class="tl-day-badge"><span>Sábado 10 de Abril 2027</span></div>
-  <div class="timeline" id="tlWrap">
-    <div class="tl-track" id="tlTrack"></div>
+  <div class="itv3">
+    <div class="itv3-track"></div>
+    <div class="itv3-glow" id="itvGlow"></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/iglesia.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">3:00 PM</p><p class="tl-ev">Ceremonia Religiosa</p><p class="tl-de">Jardín Principal</p></div></div>
+    <div class="itv3-day">Sábado 10 de Abril 2027</div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/champagne.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">4:00 PM</p><p class="tl-ev">Cóctel &amp; Wedding Merch Store</p><p class="tl-de">Jardín Principal</p></div></div>
+    <div class="itv3-item">
+      <div class="itv3-gem"></div>
+      <div class="itv3-time">3:00</div>
+      <div class="itv3-ev">Ceremonia Religiosa</div>
+      <div class="itv3-sub">Jardín Principal</div>
+    </div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/arco.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">4:45 PM</p><p class="tl-ev">Recepción</p><p class="tl-de">Ingreso al salón principal</p></div></div>
+    <div class="itv3-item">
+      <div class="itv3-gem itv3-gem-brown"></div>
+      <div class="itv3-time">4:00</div>
+      <div class="itv3-ev">Cóctel &amp; Wedding Merch</div>
+      <div class="itv3-sub">Jardín Principal</div>
+    </div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/plato.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">5:00 PM</p><p class="tl-ev">Banquete</p><p class="tl-de">Salón Principal</p></div></div>
+    <div class="itv3-item">
+      <div class="itv3-gem itv3-gem-mid"></div>
+      <div class="itv3-time">4:45</div>
+      <div class="itv3-ev">Recepción</div>
+      <div class="itv3-sub">Ingreso al salón principal</div>
+    </div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/pareja.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">6:30 PM</p><p class="tl-ev">Baile de Novios</p><p class="tl-de">El primer vals de Berenice &amp; Enrique</p></div></div>
+    <div class="itv3-item">
+      <div class="itv3-gem itv3-gem-brown"></div>
+      <div class="itv3-time">5:00</div>
+      <div class="itv3-ev">Banquete</div>
+      <div class="itv3-sub">Salón Principal</div>
+    </div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/confeti.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">7:00 PM</p><p class="tl-ev">Baile General</p><p class="tl-de">¡Todos a la pista!</p></div></div>
+    <div class="itv3-item">
+      <div class="itv3-gem"></div>
+      <div class="itv3-time">6:30</div>
+      <div class="itv3-ev">Baile de Novios</div>
+      <div class="itv3-sub">El primer vals</div>
+    </div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/pastel.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">9:30 PM</p><p class="tl-ev">Pastel</p><p class="tl-de">Jardín Principal</p></div></div>
+    <div class="itv3-item">
+      <div class="itv3-gem itv3-gem-mid"></div>
+      <div class="itv3-time">7:00</div>
+      <div class="itv3-ev">Baile General</div>
+      <div class="itv3-sub">¡Todos a la pista!</div>
+    </div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/cocktail.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">10:00 PM</p><p class="tl-ev">Fiesta</p><p class="tl-de">¡Que comience la celebración!</p></div></div>
+    <div class="itv3-item">
+      <div class="itv3-gem itv3-gem-brown"></div>
+      <div class="itv3-time">9:30</div>
+      <div class="itv3-ev">Pastel</div>
+      <div class="itv3-sub">Jardín Principal</div>
+    </div>
 
-    <div class="tl-day-badge"><span>Domingo 11 de Abril</span></div>
+    <div class="itv3-item">
+      <div class="itv3-gem"></div>
+      <div class="itv3-time">10:00</div>
+      <div class="itv3-ev">Fiesta</div>
+      <div class="itv3-sub">¡Que comience la celebración!</div>
+    </div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/ramo.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">10:30 AM</p><p class="tl-ev">Desayuno Torna Boda</p><p class="tl-de">Buen provecho</p></div></div>
+    <div class="itv3-day">Domingo 11 de Abril</div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/camara.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">12:00 PM</p><p class="tl-ev">Pool Party</p><p class="tl-de">¡A refrescarse!</p></div></div>
+    <div class="itv3-item">
+      <div class="itv3-gem itv3-gem-mid"></div>
+      <div class="itv3-time">10:30</div>
+      <div class="itv3-ev">Desayuno Torna Boda</div>
+      <div class="itv3-sub">Buen provecho</div>
+    </div>
+
+    <div class="itv3-item">
+      <div class="itv3-gem"></div>
+      <div class="itv3-time">12:00</div>
+      <div class="itv3-ev">Pool Party</div>
+      <div class="itv3-sub">¡A refrescarse!</div>
+    </div>
   </div>
 </section>
 
@@ -1426,14 +1488,51 @@ function scrollAnims() {
     scrollTrigger: { trigger: '#calendar', start: 'top 84%', once: true }
   });
 
-  ScrollTrigger.create({
-    trigger: '#itinerary', start: 'top 72%', once: true,
-    onEnter() {
-      gsap.from('.tl-card', { opacity: 0, x: -30, duration: .8, stagger: .1, ease: cine, delay: .15 });
-      gsap.from('.tl-icon-wrap', { scale: 0, duration: .6, stagger: .1, ease: 'back.out(2)', delay: .25 });
-      gsap.from('.tl-day-badge', { opacity: 0, y: 14, duration: .6, stagger: .15, ease: cine, delay: .1 });
-    }
-  });
+  // Itinerario V3 — glow scrub + gem reveal
+  (function(){
+    var glow = document.getElementById('itvGlow');
+    var section = document.getElementById('itinerary');
+    var items = document.querySelectorAll('.itv3-item');
+    if(!glow || !section) return;
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 58%',
+      end: 'bottom 42%',
+      scrub: 1.8,
+      onUpdate: function(self){
+        var track = section.querySelector('.itv3-track');
+        if(!track) return;
+        var h = track.offsetHeight - 55;
+        glow.style.top = (self.progress * h) + 'px';
+      }
+    });
+
+    items.forEach(function(item){
+      var gem = item.querySelector('.itv3-gem');
+      var isBrown = gem.classList.contains('itv3-gem-brown');
+      var gc = isBrown ? '139,105,20' : '212,184,117';
+
+      gsap.fromTo(gem,
+        {scale:0, opacity:0},
+        {scale:1, opacity:1, duration:0.6, ease:'back.out(2.8)',
+         scrollTrigger:{trigger:item, start:'top 86%', once:true},
+         onComplete:function(){
+           gsap.timeline()
+             .to(gem,{scale:1.4, filter:'drop-shadow(0 0 20px rgba('+gc+',1))',   duration:0.3, ease:'power2.out'})
+             .to(gem,{scale:1,   filter:'drop-shadow(0 0 5px rgba('+gc+',0.35))', duration:0.28,ease:'power2.in'})
+             .to(gem,{scale:1.2, filter:'drop-shadow(0 0 14px rgba('+gc+',0.8))', duration:0.22,ease:'power2.out'})
+             .to(gem,{scale:1,   filter:'drop-shadow(0 0 4px rgba('+gc+',0.25))', duration:0.32,ease:'power2.in'});
+         }
+        });
+
+      var els = [item.querySelector('.itv3-time'), item.querySelector('.itv3-ev'), item.querySelector('.itv3-sub')].filter(Boolean);
+      gsap.fromTo(els,
+        {y:14, opacity:0},
+        {y:0, opacity:1, duration:0.8, ease:'power2.out', stagger:0.08,
+         scrollTrigger:{trigger:item, start:'top 86%', once:true}});
+    });
+  })();
 
   gsap.from('.dc-sub', {
     opacity: 0, y: 22, duration: .8, ease: cine,
