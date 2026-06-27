@@ -774,7 +774,7 @@ section>*{position:relative;z-index:1}
 <!-- ENVELOPE SCREEN -->
 <div id="envelope-screen" role="button" aria-label="Toca para abrir tu invitación">
   <img id="env-image" src="sobre.png" alt="Sobre invitación Berenice &amp; Enrique" />
-  <video id="env-video" src="sobre-apertura.mp4" playsinline webkit-playsinline muted preload="auto"></video>
+  <video id="env-video" playsinline webkit-playsinline muted preload="metadata"><source src="sobre-apertura.mp4" type="video/mp4"></video>
   <p class="envelope-hint" id="env-hint">Toca para abrir</p>
 </div>
 <div id="env-flash"></div>
@@ -1317,20 +1317,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  function playVideo() {
+    var p = envVideo.play();
+    gsap.to(envImage, { opacity: 0, duration: 0.55, ease: 'power2.inOut', onComplete: function () { envImage.style.display = 'none'; } });
+    gsap.to(envVideo, { opacity: 1, duration: 0.55, ease: 'power2.inOut' });
+    if (p !== undefined) p.catch(function () {
+      gsap.to(envFlash, { opacity: 1, duration: 1.2, ease: 'none', onComplete: revealInvitation });
+    });
+  }
+
   function openEnvelope() {
     if (opened) return;
     opened = true;
     gsap.killTweensOf(envImage);
     hint.style.opacity = '0';
-    if (envVideo.readyState < 2) {
-      envFlash.style.opacity = '1';
-      revealInvitation();
-      return;
+    if (envVideo.readyState >= 2) {
+      playVideo();
+    } else {
+      envVideo.load();
+      envVideo.addEventListener('canplay', function handler() {
+        envVideo.removeEventListener('canplay', handler);
+        playVideo();
+      });
+      setTimeout(function () {
+        if (!flashStarted) {
+          gsap.to(envFlash, { opacity: 1, duration: 1.2, ease: 'none', onComplete: revealInvitation });
+        }
+      }, 4000);
     }
-    var p = envVideo.play();
-    gsap.to(envImage, { opacity: 0, duration: 0.55, ease: 'power2.inOut', onComplete: function () { envImage.style.display = 'none'; } });
-    gsap.to(envVideo, { opacity: 1, duration: 0.55, ease: 'power2.inOut' });
-    if (p !== undefined) p.catch(function () { revealInvitation(); });
   }
 
   envScreen.addEventListener('click', openEnvelope);
