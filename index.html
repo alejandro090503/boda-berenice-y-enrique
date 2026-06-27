@@ -29,12 +29,13 @@
 
 /* ── RESET ────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{
   background:var(--ink);color:var(--cream);
   font-family:'Lato',sans-serif;font-weight:300;
   overflow-x:hidden;max-width:430px;margin:0 auto;
   -webkit-tap-highlight-color:transparent;
+  width:100%;
 }
 section{padding:clamp(48px,8vh,80px) clamp(18px,5vw,28px);position:relative}
 section::after{
@@ -318,11 +319,13 @@ section>*{position:relative;z-index:1}
 
 /* ── CALENDAR ─────────────────────────────────────────── */
 #calendar{
-  background:var(--ink3);text-align:center;
-  border-top:1px solid rgba(212,184,117,.09);
-  border-bottom:1px solid rgba(212,184,117,.09);
+  background:#f0e8da;text-align:center;
+  border-top:1px solid rgba(212,184,117,.2);
+  border-bottom:1px solid rgba(212,184,117,.2);
   position:relative;overflow:hidden;
 }
+#calendar .lbl,#calendar .ttl,#calendar .cal-sub{color:var(--ink)}
+#calendar .gline{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 #calendar::before{
   content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:260px;height:260px;border-radius:50%;
@@ -344,41 +347,35 @@ section>*{position:relative;z-index:1}
   0%{transform:translate(0,0)}
   100%{transform:translate(-40px,50px)}
 }
-.timeline{margin-top:36px;position:relative;display:flex;flex-direction:column;gap:12px}
-.tl-track{
-  position:absolute;left:24px;top:36px;bottom:36px;
-  width:1px;height:auto;
-  background:linear-gradient(to bottom,transparent,rgba(212,184,117,.35) 10%,rgba(212,184,117,.3) 90%,transparent);
-  z-index:0;
-}
+.timeline{margin-top:36px;position:relative;display:flex;flex-direction:column;gap:14px}
+.tl-track{display:none}
 .tl-card{
-  display:flex;align-items:flex-start;gap:16px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
   position:relative;z-index:1;
-  padding:14px 16px 14px 0;
-  border-radius:12px;
+  padding:18px 16px;
+  border-radius:14px;
+  background:linear-gradient(165deg,rgba(212,184,117,.06),rgba(212,184,117,.02));
+  border:1px solid rgba(212,184,117,.1);
   transition:transform .3s var(--spring);
 }
-.tl-card:active{transform:scale(.98)}
+.tl-card:active{transform:scale(.97)}
 .tl-icon-wrap{
-  width:48px;height:48px;flex-shrink:0;
+  width:56px;height:56px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   border-radius:50%;position:relative;
-  background:linear-gradient(145deg,rgba(212,184,117,.12),rgba(212,184,117,.04));
-  border:1px solid rgba(212,184,117,.2);
-  box-shadow:0 4px 14px rgba(0,0,0,.25);
+  overflow:hidden;margin-bottom:10px;
 }
-.tl-icon-wrap svg{width:20px;height:20px;color:var(--gold);flex-shrink:0}
+.tl-icon-wrap img{width:100%;height:100%;object-fit:cover;display:block}
 .tl-icon-wrap::after{
-  content:'';position:absolute;inset:-3px;border-radius:50%;
-  border:1px solid rgba(212,184,117,.08);
-  opacity:0;transition:opacity .3s;
+  content:'';position:absolute;inset:0;border-radius:50%;
+  border:1.5px solid rgba(212,184,117,.2);
+  pointer-events:none;
 }
-.tl-card:hover .tl-icon-wrap::after{opacity:1}
-.tl-body{flex:1;min-width:0}
+.tl-body{width:100%}
 .tl-time{
   font-family:'Lato',sans-serif;font-size:clamp(9px,2.4vw,10px);
   letter-spacing:3px;text-transform:uppercase;color:var(--gold);
-  opacity:.7;margin-bottom:4px;font-weight:400;
+  opacity:.8;margin-bottom:4px;font-weight:400;
 }
 .tl-ev{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,4.5vw,20px);color:var(--cream);font-weight:400;line-height:1.25}
 .tl-de{font-size:clamp(10px,2.8vw,12px);color:var(--cream);opacity:.38;margin-top:3px}
@@ -396,14 +393,16 @@ section>*{position:relative;z-index:1}
 }
 
 /* ── DRESSCODE ────────────────────────────────────────── */
-#dresscode{background:var(--ink2);text-align:center;position:relative;overflow:hidden;
-  border-top:1px solid rgba(212,184,117,.08);border-bottom:1px solid rgba(212,184,117,.08)}
+#dresscode{background:#f0e8da;text-align:center;position:relative;overflow:hidden;
+  border-top:1px solid rgba(212,184,117,.2);border-bottom:1px solid rgba(212,184,117,.2)}
+#dresscode .lbl,#dresscode .ttl{color:var(--ink)}
+#dresscode .gline{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 #dresscode::before{
   content:'';position:absolute;top:20%;left:50%;transform:translateX(-50%);
   width:280px;height:280px;border-radius:50%;
   background:radial-gradient(circle,rgba(212,184,117,.05),transparent 70%);pointer-events:none;
 }
-.dc-sub{text-align:center;font-size:clamp(12px,3.3vw,14px);color:var(--cream);opacity:.62;line-height:1.9;margin:14px 0 32px}
+.dc-sub{text-align:center;font-size:clamp(12px,3.3vw,14px);color:var(--ink);opacity:.62;line-height:1.9;margin:14px 0 32px}
 .dc-figures{
   display:flex;align-items:center;justify-content:center;
   gap:30px;margin:6px auto 28px;max-width:380px;
@@ -411,7 +410,7 @@ section>*{position:relative;z-index:1}
 .dc-fig{display:flex;flex-direction:column;align-items:center;gap:14px;flex:1}
 .dc-fig img{height:220px;width:auto;display:block;filter:drop-shadow(0 6px 14px rgba(72,42,0,.22))}
 .dc-fig-label{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;letter-spacing:1px;color:var(--gold)}
-.dc-fig-sub{font-family:'Lato',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cream);opacity:.5;margin-top:-8px}
+.dc-fig-sub{font-family:'Lato',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--ink);opacity:.5;margin-top:-8px}
 .dc-sep-line{width:1px;align-self:stretch;min-height:118px;background:linear-gradient(180deg,transparent,rgba(212,184,117,.35) 18%,rgba(212,184,117,.35) 82%,transparent)}
 .palette{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-bottom:30px}
 .pal-item{text-align:center;cursor:pointer}
@@ -424,11 +423,11 @@ section>*{position:relative;z-index:1}
   transition:transform .2s var(--spring),box-shadow .2s;
 }
 .pal-sw:active{transform:scale(1.18)!important}
-.pal-nm{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--cream);opacity:.5}
+.pal-nm{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);opacity:.5}
 .dc-note{
-  background:rgba(212,184,117,.04);border-left:2px solid var(--gold);
+  background:rgba(72,42,0,.06);border-left:2px solid var(--gold);
   padding:18px 18px;border-radius:0 8px 8px 0;
-  font-size:12px;color:var(--cream);opacity:.68;line-height:1.8;
+  font-size:12px;color:var(--ink);opacity:.68;line-height:1.8;
   text-align:left;
 }
 .dc-note strong{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);display:block;margin-bottom:6px}
@@ -437,7 +436,7 @@ section>*{position:relative;z-index:1}
 .dc-avoid-sw{
   width:36px;height:36px;border-radius:50%;
   margin:0 auto 6px;
-  border:2px solid rgba(255,255,255,.12);
+  border:2px solid rgba(72,42,0,.12);
   position:relative;
 }
 .dc-avoid-sw::after{
@@ -445,7 +444,7 @@ section>*{position:relative;z-index:1}
   border:2px solid rgba(255,0,0,.4);
   background:repeating-linear-gradient(45deg,transparent,transparent 4px,rgba(255,0,0,.15) 4px,rgba(255,0,0,.15) 5px);
 }
-.dc-avoid-nm{font-size:7px;letter-spacing:1px;text-transform:uppercase;color:var(--cream);opacity:.35}
+.dc-avoid-nm{font-size:7px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);opacity:.35}
 
 /* ── FAMILY ───────────────────────────────────────────── */
 #family{background:var(--ink);position:relative;overflow:hidden}
@@ -480,7 +479,7 @@ section>*{position:relative;z-index:1}
 #gallery{
   padding:clamp(56px,8vh,80px) clamp(18px,5vw,28px) clamp(60px,9vh,90px);
   background:linear-gradient(180deg,var(--ink) 0%,var(--ink3) 50%,var(--ink) 100%);
-  text-align:center;overflow:visible;position:relative;
+  text-align:center;overflow:hidden;position:relative;
 }
 #gallery::before{
   content:'';position:absolute;top:15%;left:40%;
@@ -501,7 +500,7 @@ section>*{position:relative;z-index:1}
 .wheel-scene{
   position:relative;width:100%;height:520px;
   margin:40px auto 0;perspective:1400px;
-  transform-style:preserve-3d;overflow:visible;
+  transform-style:preserve-3d;overflow:hidden;
 }
 .wheel-ring{
   position:absolute;width:100%;height:100%;
@@ -648,34 +647,31 @@ section>*{position:relative;z-index:1}
 .kp-note{font-size:clamp(8px,2.2vw,10px);letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.6;margin-top:18px}
 
 /* ── GIFTS ────────────────────────────────────────────── */
-#gifts{background:var(--ink3);position:relative;overflow:hidden}
+#gifts{background:#f0e8da;position:relative;overflow:hidden;
+  border-top:1px solid rgba(212,184,117,.2);border-bottom:1px solid rgba(212,184,117,.2)}
 #gifts::before{
   content:'';position:absolute;bottom:-20%;left:50%;transform:translateX(-50%);
   width:280px;height:280px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,184,117,.05),transparent 70%);pointer-events:none;
+  background:radial-gradient(circle,rgba(212,184,117,.12),transparent 70%);pointer-events:none;
 }
-.gf-sub{text-align:center;font-size:clamp(12px,3.3vw,14px);color:var(--cream);opacity:.62;line-height:1.9;margin:14px 0 28px}
-.gf-card{
-  display:block;text-decoration:none;
-  background:linear-gradient(165deg,rgba(90,58,18,.35),rgba(72,42,0,.5));
-  border:1px solid rgba(212,184,117,.18);
-  border-radius:12px;padding:24px 22px;margin-bottom:12px;
-  position:relative;overflow:hidden;
-  transition:transform .25s var(--spring),border-color .25s;
-  box-shadow:0 4px 16px rgba(0,0,0,.2);
-}
-.gf-card::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(to right,transparent,rgba(212,184,117,.35),transparent)}
-.gf-card:active{transform:scale(.98);border-color:var(--gold)}
-.gf-card-top{display:flex;align-items:center;gap:14px}
-.gf-logo{
-  width:44px;height:44px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(212,184,117,.1);color:var(--gold);flex-shrink:0;
-  border:1px solid rgba(212,184,117,.22);
-}
-.gf-logo svg{width:22px;height:22px}
-.gf-logo span{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);font-weight:500;line-height:1}
-.gf-ttl{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);font-weight:400}
+#gifts .lbl,#gifts .ttl{color:var(--ink)}
+#gifts .gline{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.gf-sub{text-align:center;font-size:clamp(12px,3.3vw,14px);color:var(--ink);opacity:.62;line-height:1.9;margin:14px 0 28px}
+/* ── Sobre interactivo lluvia de sobres ── */
+.env-interactive{display:flex;flex-direction:column;align-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none;border:none;background:none;padding:0}
+.env-body{perspective:700px;position:relative;width:260px;height:200px}
+.env-body svg.env-svg{width:100%;height:100%}
+.env-flap-wrap{position:absolute;top:46px;left:18px;width:224px;height:86px;transform-origin:top center;transform-style:preserve-3d;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .65s cubic-bezier(.4,0,.2,1);pointer-events:none;z-index:2}
+.env-interactive.open .env-flap-wrap{transform:rotateX(-175deg)}
+.env-open-content{overflow:hidden;max-height:0;opacity:0;transition:max-height .55s .3s ease,opacity .4s .38s ease;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 20px;text-align:center;pointer-events:none}
+.env-interactive.open .env-open-content{max-height:240px;opacity:1;pointer-events:auto}
+.env-mailbox-icon{width:40px;height:40px;color:var(--gold);margin-top:10px}
+.env-title{font-family:'Great Vibes',cursive;font-size:30px;color:var(--ink);letter-spacing:.5px;line-height:1.2}
+.env-desc{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--ink2);line-height:1.75}
+.env-tap-hint{font-family:'Lato',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-top:6px;transition:opacity .3s}
+.env-interactive.open~.env-tap-hint{opacity:0;pointer-events:none}
+@keyframes env-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.env-body{animation:env-breathe 3.6s ease-in-out infinite}
 .gf-nt{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.7;margin:10px 0 0 58px}
 .gf-msg{font-size:12px;color:var(--cream);opacity:.55;line-height:1.8;margin:14px 0 0 58px}
 
@@ -737,7 +733,7 @@ section>*{position:relative;z-index:1}
   background:radial-gradient(circle,rgba(212,184,117,.07),transparent 70%);
   will-change:transform;
 }
-#main-content{position:relative}
+#main-content{position:relative;overflow-x:hidden}
 
 /* ── SHIMMER LINE (moving gold line between sections) ── */
 .shimmer-line{
@@ -907,27 +903,27 @@ section>*{position:relative;z-index:1}
   <div class="timeline" id="tlWrap">
     <div class="tl-track" id="tlTrack"></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 00-2 2v16l8-4 8 4V4a2 2 0 00-2-2z"/></svg></div><div class="tl-body"><p class="tl-time">3:00 PM</p><p class="tl-ev">Ceremonia Religiosa</p><p class="tl-de">Jardín Principal</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/iglesia.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">3:00 PM</p><p class="tl-ev">Ceremonia Religiosa</p><p class="tl-de">Jardín Principal</p></div></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 110 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg></div><div class="tl-body"><p class="tl-time">4:00 PM</p><p class="tl-ev">Cóctel &amp; Wedding Merch Store</p><p class="tl-de">Jardín Principal</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/champagne.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">4:00 PM</p><p class="tl-ev">Cóctel &amp; Wedding Merch Store</p><p class="tl-de">Jardín Principal</p></div></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="tl-body"><p class="tl-time">4:45 PM</p><p class="tl-ev">Recepción</p><p class="tl-de">Ingreso al salón principal</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/arco.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">4:45 PM</p><p class="tl-ev">Recepción</p><p class="tl-de">Ingreso al salón principal</p></div></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 110 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><path d="M7 2v4M11 2v4"/></svg></div><div class="tl-body"><p class="tl-time">5:00 PM</p><p class="tl-ev">Banquete</p><p class="tl-de">Salón Principal</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/plato.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">5:00 PM</p><p class="tl-ev">Banquete</p><p class="tl-de">Salón Principal</p></div></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="tl-body"><p class="tl-time">6:30 PM</p><p class="tl-ev">Baile de Novios</p><p class="tl-de">El primer vals de Berenice &amp; Enrique</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/pareja.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">6:30 PM</p><p class="tl-ev">Baile de Novios</p><p class="tl-de">El primer vals de Berenice &amp; Enrique</p></div></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="tl-body"><p class="tl-time">7:00 PM</p><p class="tl-ev">Baile General</p><p class="tl-de">¡Todos a la pista!</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/confeti.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">7:00 PM</p><p class="tl-ev">Baile General</p><p class="tl-de">¡Todos a la pista!</p></div></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="tl-body"><p class="tl-time">9:30 PM</p><p class="tl-ev">Pastel</p><p class="tl-de">Jardín Principal</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/pastel.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">9:30 PM</p><p class="tl-ev">Pastel</p><p class="tl-de">Jardín Principal</p></div></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="tl-body"><p class="tl-time">10:00 PM</p><p class="tl-ev">Fiesta</p><p class="tl-de">¡Que comience la celebración!</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/cocktail.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">10:00 PM</p><p class="tl-ev">Fiesta</p><p class="tl-de">¡Que comience la celebración!</p></div></div>
 
     <div class="tl-day-badge"><span>Domingo 11 de Abril</span></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div><div class="tl-body"><p class="tl-time">10:30 AM</p><p class="tl-ev">Desayuno Torna Boda</p><p class="tl-de">Buen provecho</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/ramo.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">10:30 AM</p><p class="tl-ev">Desayuno Torna Boda</p><p class="tl-de">Buen provecho</p></div></div>
 
-    <div class="tl-card"><div class="tl-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><path d="M12 9v6M9 12h6"/></svg></div><div class="tl-body"><p class="tl-time">12:00 PM</p><p class="tl-ev">Pool Party</p><p class="tl-de">¡A refrescarse!</p></div></div>
+    <div class="tl-card"><div class="tl-icon-wrap"><img src="iconos/camara.png" alt="" loading="lazy"></div><div class="tl-body"><p class="tl-time">12:00 PM</p><p class="tl-ev">Pool Party</p><p class="tl-de">¡A refrescarse!</p></div></div>
   </div>
 </section>
 
@@ -959,12 +955,53 @@ section>*{position:relative;z-index:1}
   <div class="gline"></div>
   <p class="gf-sub">Si deseas obsequiarnos algo especial,<br>compartimos contigo nuestra opción.</p>
 
-  <div class="gf-card">
-    <div class="gf-card-top">
-      <div class="gf-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8V6a3 3 0 00-3-3h0a3 3 0 00-3 3v0M12 8V6a3 3 0 013-3h0a3 3 0 013 3v0"/><line x1="12" y1="8" x2="12" y2="21"/><line x1="3" y1="14" x2="21" y2="14"/></svg></div>
-      <p class="gf-ttl">Lluvia de Sobres</p>
-    </div>
-    <p class="gf-msg">Tu presencia es el mejor regalo. Si deseas tener un detalle extra, puedes hacerlo a través de un sobre el día del evento.</p>
+  <div style="margin:32px auto 0;display:flex;flex-direction:column;align-items:center;gap:0;">
+    <button class="env-interactive" aria-label="Sobre — toca para abrir" aria-expanded="false">
+      <div class="env-body">
+        <svg class="env-svg" viewBox="0 0 260 200" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="be-env-fill" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#f5efe6"/>
+              <stop offset="100%" stop-color="#faf6ef"/>
+            </linearGradient>
+          </defs>
+          <rect x="18" y="52" width="224" height="132" rx="10"
+                fill="url(#be-env-fill)" stroke="rgba(212,184,117,.5)" stroke-width="1.4"/>
+          <path d="M18 184 L130 110 L242 184" stroke="rgba(212,184,117,.35)" stroke-width="1" fill="none"/>
+          <line x1="90"  y1="30" x2="90"  y2="20" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
+          <line x1="130" y1="24" x2="130" y2="14" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" opacity=".55"/>
+          <line x1="170" y1="30" x2="170" y2="20" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
+          <line x1="110" y1="18" x2="110" y2="10" stroke="var(--gold-lt)" stroke-width="1" stroke-linecap="round" opacity=".3"/>
+          <line x1="150" y1="18" x2="150" y2="10" stroke="var(--gold-lt)" stroke-width="1" stroke-linecap="round" opacity=".3"/>
+          <circle cx="130" cy="118" r="16" fill="rgba(212,184,117,.12)" stroke="rgba(212,184,117,.4)" stroke-width="1"/>
+          <text x="130" y="123" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="var(--ink)" opacity=".7">B&amp;E</text>
+        </svg>
+        <div class="env-flap-wrap" aria-hidden="true">
+          <svg viewBox="0 0 224 86" preserveAspectRatio="none" style="width:100%;height:100%">
+            <defs>
+              <linearGradient id="be-flap-fill" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#e8dcc8"/>
+                <stop offset="100%" stop-color="#f5efe6"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 0 L112 86 L224 0 Z"
+                  fill="url(#be-flap-fill)" stroke="rgba(212,184,117,.5)" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="env-open-content" aria-live="polite">
+        <svg class="env-mailbox-icon" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <rect x="8" y="22" width="36" height="24" rx="5"/>
+          <path d="M8 30 Q26 38 44 30"/>
+          <rect x="18" y="8" width="16" height="16" rx="2"/>
+          <path d="M18 8 Q26 3 34 8"/>
+          <rect x="20" y="28" width="12" height="2.5" rx="1.25" fill="currentColor" stroke="none" opacity=".4"/>
+        </svg>
+        <p class="env-title">Lluvia de Sobres</p>
+        <p class="env-desc">El día de la boda habrá un buzón especial<br>donde podrás depositar tu sobre con mucho cariño.</p>
+      </div>
+    </button>
+    <p class="env-tap-hint">Toca el sobre</p>
   </div>
 </section>
 
@@ -1429,10 +1466,25 @@ function scrollAnims() {
     scrollTrigger: { trigger: '#kids-policy', start: 'top 82%', once: true }
   });
 
-  gsap.from('.gf-card', {
-    opacity: 0, y: 28, scale: .97, duration: .7, stagger: .12, ease: cine,
+  gsap.from('.env-interactive', {
+    opacity: 0, y: 28, scale: .97, duration: .7, ease: cine,
     scrollTrigger: { trigger: '#gifts', start: 'top 80%', once: true }
   });
+
+  // Sobre interactivo
+  (function(){
+    var btn = document.querySelector('.env-interactive');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      var isOpen = btn.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    btn.addEventListener('touchstart', function(e){
+      e.preventDefault();
+      var isOpen = btn.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }, {passive:false});
+  })();
 
   gsap.from('.alb-qr-frame', {
     opacity: 0, scale: .84, rotateY: 8, duration: .9, ease: 'back.out(1.5)',
