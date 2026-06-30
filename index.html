@@ -297,7 +297,15 @@ section>*{position:relative;z-index:1}
   pointer-events:none;
 }
 .cal-sub{font-size:clamp(13px,3.3vw,15px);color:var(--cream);opacity:.85;line-height:1.9;margin:14px 0 28px;font-weight:600}
-#calendar .btn-gold{background:linear-gradient(135deg,var(--gold),#e8d5a3);color:var(--ink);box-shadow:0 6px 28px rgba(0,0,0,.4);border:1.5px solid rgba(201,169,110,.5);font-weight:700;letter-spacing:.3em}
+#calendar .btn-gold{
+  background:linear-gradient(135deg,var(--cream) 0%,#f5efe6 100%);
+  color:var(--ink);
+  box-shadow:0 6px 28px rgba(0,0,0,.4),0 0 0 1px rgba(201,169,110,.4);
+  border:2px solid var(--gold);
+  font-weight:700;letter-spacing:.3em;
+  font-size:clamp(10px,2.8vw,12px);
+  padding:18px 24px;min-height:54px;
+}
 
 /* ── ITINERARIO V3 — Centered Glowing Timeline ── */
 #itinerary{background:var(--ink);overflow:visible;padding-left:24px;padding-right:24px;position:relative}
