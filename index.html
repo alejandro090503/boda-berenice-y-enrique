@@ -385,24 +385,24 @@ section>*{position:relative;z-index:1}
 .itv3-item:last-child{padding-bottom:10px;}
 
 /* ── DRESSCODE ────────────────────────────────────────── */
-#dresscode{background:linear-gradient(175deg,rgba(90,58,18,.55),rgba(50,30,5,.85));text-align:center;position:relative;overflow:hidden}
-#dresscode .lbl,#dresscode .ttl{color:var(--cream);text-shadow:0 1px 4px rgba(0,0,0,.3)}
-#dresscode .lbl{font-weight:700;opacity:.8}
+#dresscode{background:#f0e8da;text-align:center;position:relative;overflow:hidden}
+#dresscode .lbl,#dresscode .ttl{color:var(--ink);text-shadow:none}
+#dresscode .lbl{font-weight:700;opacity:.7}
 #dresscode .gline{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 #dresscode::before{
   content:'';position:absolute;top:20%;left:50%;transform:translateX(-50%);
   width:280px;height:280px;border-radius:50%;
   background:radial-gradient(circle,rgba(212,184,117,.05),transparent 70%);pointer-events:none;
 }
-.dc-sub{text-align:center;font-size:clamp(13px,3.3vw,15px);color:var(--cream);opacity:.85;line-height:1.9;margin:14px 0 32px;font-weight:600}
+.dc-sub{text-align:center;font-size:clamp(13px,3.3vw,15px);color:var(--ink);opacity:1;line-height:1.9;margin:14px 0 32px;font-weight:600}
 .dc-figures{
   display:flex;align-items:center;justify-content:center;
   gap:30px;margin:6px auto 28px;max-width:380px;
 }
 .dc-fig{display:flex;flex-direction:column;align-items:center;gap:14px;flex:1}
-.dc-fig img{height:220px;width:auto;display:block;filter:drop-shadow(0 6px 18px rgba(201,169,110,.25))}
-.dc-fig-label{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;letter-spacing:1px;color:var(--cream)}
-.dc-fig-sub{font-family:'Lato',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cream);opacity:.8;margin-top:-8px}
+.dc-fig img{height:220px;width:auto;display:block;filter:drop-shadow(0 6px 14px rgba(72,42,0,.22))}
+.dc-fig-label{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;letter-spacing:1px;color:var(--ink)}
+.dc-fig-sub{font-family:'Lato',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--ink);opacity:.95;margin-top:-8px}
 .dc-sep-line{width:1px;align-self:stretch;min-height:118px;background:linear-gradient(180deg,transparent,rgba(212,184,117,.35) 18%,rgba(212,184,117,.35) 82%,transparent)}
 .palette{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-bottom:30px}
 .pal-item{text-align:center;cursor:pointer}
@@ -415,14 +415,14 @@ section>*{position:relative;z-index:1}
   transition:transform .2s var(--spring),box-shadow .2s;
 }
 .pal-sw:active{transform:scale(1.18)!important}
-.pal-nm{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--cream);opacity:.8;font-weight:700}
+.pal-nm{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);opacity:.9;font-weight:700}
 .dc-note{
-  background:rgba(0,0,0,.2);border-left:2px solid var(--gold);
+  background:rgba(72,42,0,.06);border-left:2px solid var(--gold);
   padding:18px 18px;border-radius:0 8px 8px 0;
-  font-size:13px;color:var(--cream);opacity:.85;line-height:1.8;font-weight:600;
+  font-size:13px;color:var(--ink);opacity:.9;line-height:1.8;font-weight:600;
   text-align:left;
 }
-.dc-note strong{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--cream);display:block;margin-bottom:6px;font-weight:700}
+.dc-note strong{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ink);display:block;margin-bottom:6px;font-weight:700}
 .dc-avoid{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:20px}
 .dc-avoid-item{text-align:center}
 .dc-avoid-sw{
@@ -436,7 +436,7 @@ section>*{position:relative;z-index:1}
   border:2px solid rgba(255,0,0,.4);
   background:repeating-linear-gradient(45deg,transparent,transparent 4px,rgba(255,0,0,.15) 4px,rgba(255,0,0,.15) 5px);
 }
-.dc-avoid-nm{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--cream);opacity:.7;font-weight:600}
+.dc-avoid-nm{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);opacity:.8;font-weight:600}
 
 /* ── FAMILY ───────────────────────────────────────────── */
 #family{background:var(--ink);position:relative;overflow:hidden}
@@ -1162,7 +1162,7 @@ section>*{position:relative;z-index:1}
   <p class="alb-hint">Compartirás tus fotos con los demás invitados.<br>Podrás ver el álbum completo después del evento.</p>
 </section>
 
-<div class="blend blend-dark-beige"></div>
+<div class="blend" style="background:linear-gradient(to bottom,var(--ink),#f0e8da)"></div>
 
 <!-- ═══════════════ 9. DRESS CODE ════════════════════ -->
 <section id="dresscode">
@@ -1204,7 +1204,7 @@ section>*{position:relative;z-index:1}
   </div>
 </section>
 
-<div class="blend blend-beige-dark"></div>
+<div class="blend" style="background:linear-gradient(to bottom,#f0e8da,var(--ink))"></div>
 
 <!-- ═══════════════ 10. FAMILIA ══════════════════════ -->
 <section id="family">
