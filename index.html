@@ -184,16 +184,17 @@ section>*{position:relative;z-index:1}
   position:relative;z-index:3;text-align:center;
   display:flex;flex-direction:column;align-items:center;
 }
-.h-we  {font-size:9px;letter-spacing:7px;text-transform:uppercase;color:var(--gold)}
-.h-div {display:flex;align-items:center;gap:14px;margin:20px 0 6px;width:100%;justify-content:center}
-.h-div::before,.h-div::after{content:'';flex:1;max-width:65px;height:1px;background:linear-gradient(to right,transparent,var(--gold))}
-.h-div::after{background:linear-gradient(to left,transparent,var(--gold))}
-.h-div-dot{font-size:10px;color:var(--gold);letter-spacing:6px}
+.h-mono{
+  width:clamp(100px,28vw,140px);height:auto;
+  margin-bottom:10px;
+  filter:drop-shadow(0 2px 16px rgba(0,0,0,.4));
+  will-change:transform,opacity;
+}
 
 /* Name clip reveal */
 .h-clip{overflow:hidden;line-height:1.25;padding-top:8px}
 .h-name{
-  font-family:'Great Vibes',cursive;font-size:clamp(60px,18vw,82px);color:var(--cream);display:block;
+  font-family:'Great Vibes',cursive;font-size:clamp(48px,14vw,68px);color:var(--cream);display:block;
   text-shadow:0 2px 12px rgba(0,0,0,.5),0 6px 36px rgba(0,0,0,.4),0 0 60px rgba(212,184,117,.12);
   will-change:transform;
 }
@@ -904,20 +905,16 @@ section>*{position:relative;z-index:1}
   <div class="h-particles" id="hPart"></div>
 
   <div class="h-cnt" id="hCnt">
-    <p class="h-we" id="hWe">Nos casamos</p>
-
-    <div class="h-div" id="hDiv">
-      <span class="h-div-dot">✦ · ✦</span>
-    </div>
+    <img src="monograma.png" alt="B&amp;E" class="h-mono" id="hMono">
 
     <div class="h-clip"><span class="h-name" id="hN1">Berenice</span></div>
     <div class="h-amp-clip"><span class="h-amp" id="hAmp">&amp;</span></div>
     <div class="h-clip"><span class="h-name" id="hN2">Enrique</span></div>
 
-    <div class="gline" style="margin-top:28px" id="hLine"></div>
+    <div class="gline" style="margin-top:22px" id="hLine"></div>
 
     <div class="h-date-wrap" id="hDate">
-      <p class="h-date">10 · Abril · MMXXVII</p>
+      <p class="h-date">10 · Abril · 2027</p>
       <p class="h-city">Apaxco · Estado de México</p>
     </div>
   </div>
@@ -1533,18 +1530,18 @@ window.addEventListener('scroll', () => {
 
 /* ── HERO ANIMATIONS ─────────────────────────────────── */
 function heroAnim() {
-  gsap.set(['#hWe','#hDiv','#hLine','#hDate','#hScroll'], { opacity: 0 });
+  gsap.set(['#hMono','#hLine','#hDate','#hScroll'], { opacity: 0 });
+  gsap.set('#hMono', { scale: .6 });
   gsap.set(['#hN1','#hN2','#hAmp'], { yPercent: 110 });
 
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl
-    .to('#hWe',    { opacity: 1, duration: .7 }, .1)
-    .to('#hDiv',   { opacity: 1, duration: .5 }, .3)
-    .to('#hN1',    { yPercent: 0, duration: 1 }, .45)
-    .to('#hAmp',   { yPercent: 0, duration: .8 }, .7)
-    .to('#hN2',    { yPercent: 0, duration: 1  }, .82)
-    .to('#hLine',  { opacity: .7, duration: .6 }, 1.15)
-    .to('#hDate',  { opacity: 1, duration: .7  }, 1.28)
+    .to('#hMono',  { opacity: 1, scale: 1, duration: 1, ease: 'back.out(1.4)' }, .1)
+    .to('#hN1',    { yPercent: 0, duration: 1 }, .5)
+    .to('#hAmp',   { yPercent: 0, duration: .8 }, .75)
+    .to('#hN2',    { yPercent: 0, duration: 1  }, .9)
+    .to('#hLine',  { opacity: .7, duration: .6 }, 1.25)
+    .to('#hDate',  { opacity: 1, duration: .7  }, 1.4)
     .to('#hScroll',{ opacity: 1, duration: .5  }, 1.7);
 
   gsap.to('#heroBg', {
